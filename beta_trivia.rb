@@ -34,24 +34,27 @@ start
 
 
 class AnswersTally
+
+  def initialize(final_result, score)
+  @final_result = final_result
+  @score = score
+  end
+
+
   def answer_a
-    if answer == 'A'
-      final_result += 1
-    end
+    final_result += 1
   end
 
   def answer_b
-    if answer == 'B'
-      final result += 1
-    end
+    final_result += 1
   end
 
   def answer_c
-    if answer == 'C'
-      final_result += 1
+    final_result += 1
+  end
 
-    score = 0
-    final_result = final_result + score
-    end
+  def tally(total_tally)
+    total_tally = @score + @final_result
+    puts "#{total_tally}"
   end
 end
