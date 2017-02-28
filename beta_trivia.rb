@@ -13,7 +13,10 @@ B. ReactJs
 C. PHP ',
 'A. 2006
 B. 2009
-C. 2013'
+C. 2013',
+'A. 1980s
+B. 1990s,
+C. 2000s'
 ]
 
 
@@ -24,6 +27,10 @@ def start
   puts 'We use a multiple choice answer system'
   puts '>>>'
   sleep 1
+  puts "Please input your name."
+  @name = gets.chomp
+  puts "Fantastic, #{@name}. Lets get started!"
+  sleep 2
   question_one
 end
 
@@ -33,32 +40,26 @@ def question_one
  puts  @answers[0]
    answer_one = gets.chomp.upcase
    sleep 1
-    unless answer_one == 'B'
-      puts 'Incorrect'
-      puts "Your current score is #{@player_tally}"
-      question_two
-    else
-      puts 'Correct answer'
-      @player_tally += 1
-      puts "Your current score is, #{@player_tally}"
-      question_two
-    end
+   unless answer_one == 'B'
+   incorrect_answer
+   question_two
+   else
+     correct_answer
+     question_two
+   end
 end
 
 def question_two
-  puts '2. Which year was first the mac released?'
+  puts '2. Which year was the first mac released?'
   sleep 2
   puts @answers[1]
     answer_two = gets.chomp.upcase
     sleep 1
     unless answer_two == 'B'
-      puts 'Incorrect'
-      puts "Your current score is #{@player_tally}"
-      question_three
+    incorrect_answer
+    question_three
     else
-      puts 'Correct Answer'
-      @player_tally += 1
-      puts "Your current score is #{@player_tally}"
+      correct_answer
       question_three
     end
 
@@ -70,16 +71,13 @@ def question_three
   puts @answers[2]
   answer_three = gets.chomp.upcase
   sleep 1
-    unless answer_three == 'C'
-      puts 'Incorrect'
-      puts "Your current score is #{@player_tally}"
-      question_four
-    else
-      puts 'Correct'
-      @player_tally += 1
-      puts "Your current score is #{@player_tally}"
-      question_four
-    end
+  unless answer_three == 'C'
+  incorrect_answer
+  question_four
+  else
+    correct_answer
+    question_four
+  end
 end
 
 def question_four
@@ -90,21 +88,62 @@ def question_four
   sleep 1
     unless answer_four == 'A'
     incorrect_answer
+    question_five
     else
       correct_answer
+      question_five
     end
 end
 
-
-
-  def correct_answer
-    puts 'Correct'
-    puts "Your current score is #{@player_tally}"
+def question_five
+  puts '5. In what decade was ruby created?'
+  sleep 2
+  puts @answers[4]
+  answer_five = gets.chomp.upcase
+  sleep 1
+  unless answer_five == 'B'
+    incorrect_answer
+    finish
+  else
+    correct_answer
+    finish
   end
+end
 
-   def incorrect_answer
-     puts 'Incorrect'
-     puts "Your current score is #{@player_tally}"
 
+def correct_answer
+  puts 'Correct'
+  @player_tally += 1
+  puts "Your current score is #{@player_tally}"
+end
+
+def incorrect_answer
+  puts 'Incorrect'
+  puts "Your current score is #{@player_tally}"
+end
+
+def finish
+  puts "Thanks for playing #{@name}. Lets see how you went!"
+  sleep 1
+  puts "You got #{@player_telly} out of 5!"
+  puts 'Would you like to play again? y/n'
+  choice = gets.chomp.upcase
+  if choice == 'Y'
+    clear
+    start
+   else
+    clear
+  end
+end
+
+def clear
+  system 'clear' or system 'cls'
+end
 
 start
+
+
+
+#Start and finish can go in the same class.
+#Questions in one class
+#
