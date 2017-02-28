@@ -1,73 +1,51 @@
+#A simple start!
+@player_tally = 0
+@answers = ['A. Ruby B. Javascript C. Python', 'A. 1983 B. 1984 C. 1985 ']
 
 def start
-puts 'Please input your name :D'
-@name = gets.chomp
-puts " Hello #{@name}."
-sleep 1
-puts 'This is a trivia game designed to test your knowledge in technology!'
-sleep 1
-puts 'To make things a little easier, the test will be multiple choice.'
-sleep 3
-puts 'Input A, B, or C as your answer.'
-questions
+  puts 'Welcome to the coder factory tech trivia game.'
+  puts '>>>'
+  puts 'We use a multiple choice answer system'
+  puts '>>>'
+  question_one
 end
-
 
 def question_one
-  puts 'Time for the test. Are you ready?'
-  sleep 2
-  puts '1. In which language did Barack Obama write his first line of code?'
-  puts '
+  puts '1. What language did Barack Obama write his first line of code?'
+ answers = ['
   A. Ruby
   B. Javascript
-  C. Python'
-  answer
+  C. Python ']
+  answers.each {|answer| puts answer}
+  answer_one = gets.chomp.upcase
+    unless answer_one == 'B'
+      puts 'Incorrect'
+      puts "Your current score is #{@player_tally}"
+      question_two
+    else
+      puts 'Correct answer'
+      @player_tally += 1
+      puts "Your current score is, #{@player_tally}"
+      question_two
+    end
 end
 
-def answer_one
-  puts 'Input your answer'
- gets.chomp.upcase
+def question_two
+  puts '2. Which year was the mac released?'
+  answers = ['
+    A. 1983
+    B. 1984
+    C. 1985']
+    answers.each {|answer| puts answer}
+    answer_two = gets.chomp.upcase
+    unless answer_two == 'B'
+      puts 'Incorrect'
+      puts "Your current score is #{@player_tally}"
+    else
+      puts 'Correct Answer'
+      @player_tally += 1
+      puts "Your current score is #{@player_tally}"
+    end
 end
 
-class QuestionAnswer
-  def initialize(question, choices, correct_answer_index)
-
-end
-end
-
-obama_question = QuestionAnswer.new(
-  'In which language did Barack Obama write his first line of code?',
-  [
-    'A. Ruby',
-    'B. Javascript',
-    'C. Python'
-  ],
-  1
-)
-
-class AnswersTally
-
-  def initialize(final_result, score)
-  @final_result = final_result
-  @score = score
-  end
-
-  def answer_a
-    final_result += 1
-  end
-
-  def answer_b
-    final_result += 1
-  end
-
-  def answer_c
-    final_result += 1
-  end
-
-  def final_score
-    puts final_result + score
-  end
-end
-
-tally = AnswersTally.new()
-tally.final_score
+start
