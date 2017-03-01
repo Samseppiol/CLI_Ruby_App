@@ -1,7 +1,4 @@
 #A simple start!
-
-
-
 class Quiz
   def initialize(question_answers)
     @question_answers = question_answers
