@@ -1,9 +1,17 @@
 require_relative 'q&aclass'
+require 'csv'
+
+HEADINGS = ['Name', 'High Score', 'Date']
+HIGH_SCORES = 'highscores.csv'
+
+
+
 
 class Quiz
   def initialize(question_answers)
     @question_answers = question_answers
   end
+
 
   def start
     # Get user's name
@@ -33,6 +41,14 @@ class Quiz
     finish
   end
 
+  def tally
+    1.times do
+      puts 'Your record has been succesfully saved.'
+      File.open("highscores.txt", "a") { |f| f.puts "#{@name} had a score of #{@player_tally} at #{Time.now}" }
+      File.open("highscores.csv", "a+") { |csv| csv.puts "#{@name}, #{@player_tally}, #{Time.now}"}
+    end
+  end
+
   def correct_answer
     puts 'Correct'
     @player_tally += 1
@@ -48,6 +64,7 @@ class Quiz
     puts "Thanks for playing #{@name}. Lets see how you went!"
     sleep 1
     puts "You got #{@player_tally} out of 16!"
+    tally
     puts 'Would you like to play again? y/n'
     choice = gets.chomp.upcase
     if choice == 'Y'

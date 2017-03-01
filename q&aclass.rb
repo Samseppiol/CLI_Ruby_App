@@ -12,10 +12,16 @@ class QuestionAnswer
     puts  @choices
     answer_one = gets.chomp.upcase
     sleep 1
-    if answer_one == @correct_answer
-      return true
+    case answer_one
+    when 'A', 'B', 'C'
+      if answer_one == @correct_answer
+        return true
+      else
+        return false
+      end
     else
-      return false
+      puts 'Try that again.'
+      ask(index)
     end
   end
 end
