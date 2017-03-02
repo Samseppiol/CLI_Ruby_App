@@ -8,12 +8,12 @@ class QuestionAnswer
   # Returns true when answered correctly, false when incorrectly
   def ask(index)
     puts "#{index + 1}. #{@question}"
-    sleep 0.5
+    # sleep 0.5
     puts  @choices
     answer_one = gets.chomp.upcase
-    sleep 1
+    # sleep 1
     case answer_one
-    when /[a-cA-C]/
+    when /^[a-cA-C]$/
       if answer_one == @correct_answer
         return true
       else

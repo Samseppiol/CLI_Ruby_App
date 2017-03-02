@@ -1,5 +1,5 @@
 require_relative 'q&aclass'
-require 'csv'
+require 'CSV'
 
 HEADINGS = ['Name', 'High Score', 'Date']
 HIGH_SCORES = 'highscores.csv'
@@ -21,8 +21,15 @@ class Quiz
     puts 'We use a multiple choice answer system'
     puts '>>>'
     sleep 1
-    puts "Please input your name."
-    @name = gets.chomp
+    while @name.nil?
+      puts "Please input your name."
+      @name = gets.strip
+      case @name
+      when /^[a-zA-Z]+$/
+      else
+        @name = nil
+      end
+    end
     puts "Fantastic, #{@name}. Lets get started!"
     sleep 2
 
@@ -42,11 +49,21 @@ class Quiz
   end
 
   def tally
-    1.times do
-      puts 'Your record has been succesfully saved.'
-      File.open("highscores.txt", "a") { |f| f.puts "#{@name} had a score of #{@player_tally} at #{Time.now}" }
-      File.open("highscores.csv", "a+") { |csv| csv.puts "#{@name}, #{@player_tally}/20, #{Time.now}"}
+    time = Time.new
+    puts 'Your record has been succesfully saved.'
+    File.open("highscores.txt", "a") { |f| f.puts "#{@name} had a score of #{@player_tally} at #{time.ctime}" }
+    row = [@name, @player_tally, time.ctime ]
+    CSV.open(HIGH_SCORES, 'a') { |csv| csv << row }
+    table_results
+  end
+
+  def table_results
+    high_scores_table = CSV.read(HIGH_SCORES, headers: true)
+    high_scores_unsorted = high_scores_table.each.to_a
+    high_scores_sorted = high_scores_unsorted.sort_by do |row|
+      -row['High Score'].to_i
     end
+    puts high_scores_sorted
   end
 
   def correct_answer
