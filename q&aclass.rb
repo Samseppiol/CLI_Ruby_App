@@ -13,7 +13,7 @@ class QuestionAnswer
     answer_one = gets.chomp.upcase
     sleep 1
     case answer_one
-    when 'A', 'B', 'C'
+    when /[a-cA-C]/
       if answer_one == @correct_answer
         return true
       else

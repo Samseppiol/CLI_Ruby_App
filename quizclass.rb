@@ -45,7 +45,7 @@ class Quiz
     1.times do
       puts 'Your record has been succesfully saved.'
       File.open("highscores.txt", "a") { |f| f.puts "#{@name} had a score of #{@player_tally} at #{Time.now}" }
-      File.open("highscores.csv", "a+") { |csv| csv.puts "#{@name}, #{@player_tally}, #{Time.now}"}
+      File.open("highscores.csv", "a+") { |csv| csv.puts "#{@name}, #{@player_tally}/20, #{Time.now}"}
     end
   end
 
@@ -63,7 +63,7 @@ class Quiz
   def finish
     puts "Thanks for playing #{@name}. Lets see how you went!"
     sleep 1
-    puts "You got #{@player_tally} out of 16!"
+    puts "You got #{@player_tally} out of 20!"
     tally
     puts 'Would you like to play again? y/n'
     choice = gets.chomp.upcase
@@ -177,7 +177,30 @@ B. Bjarne Stroustrup
 C. Guido van Rossum',
   'A'
   ),
-
+  QuestionAnswer.new(
+  'Who was the original creator of C++?', 'A. Bill Gates
+B. Bjarne Stroustrup
+C. Guido van Rossum',
+  'B'
+  ),
+  QuestionAnswer.new(
+  'When was the first Apple Iphone released??', 'A. 2005
+B. 2006
+C. 2007',
+  'C'
+  ),
+  QuestionAnswer.new(
+  'What year was Microsoft Windows first released?', 'A. 1975
+  B. 1980
+  C. 1985',
+  'C'
+  ),
+  QuestionAnswer.new(
+  'Who created the first laptop?', 'A. Adam Osborne
+B. Steve Jobs
+C. Bill Gates',
+  'A'
+  ),
 ])
 
 quiz.start
