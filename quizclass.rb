@@ -1,5 +1,6 @@
 require_relative 'q&aclass'
 require 'CSV'
+require 'terminal-table'
 
 HEADINGS = ['Name', 'High Score', 'Date']
 HIGH_SCORES = 'highscores.csv'
@@ -64,6 +65,8 @@ class Quiz
       -row['High Score'].to_i
     end
     puts high_scores_sorted
+
+
   end
 
   def correct_answer
@@ -201,15 +204,15 @@ C. Guido van Rossum',
   'B'
   ),
   QuestionAnswer.new(
-  'When was the first Apple Iphone released??', 'A. 2005
+  'When was the first Apple Iphone released?', 'A. 2005
 B. 2006
 C. 2007',
   'C'
   ),
   QuestionAnswer.new(
   'What year was Microsoft Windows first released?', 'A. 1975
-  B. 1980
-  C. 1985',
+B. 1980
+C. 1985',
   'C'
   ),
   QuestionAnswer.new(
